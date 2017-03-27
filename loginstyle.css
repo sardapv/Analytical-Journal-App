@@ -1,0 +1,9 @@
+#ap{
+    -fx-background-image: url("bg2.jpg");
+    -fx-background-repeat: inherit;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+}
+.text-field,.button,.password-field{
+    -fx-background-color: white;
+}

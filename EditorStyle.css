@@ -1,0 +1,26 @@
+#ap{
+    -fx-background-image: url("bg3.jpeg");
+    -fx-background-repeat: inherit;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-border-width: 200%;
+}
+.text-field,.button{
+    -fx-background-color: rgba(255, 255, 255, 0.5);;
+
+}
+#htmleditor{
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+#slider{
+    -fx-background-color: transparent;
+}
+#pbar{
+    -fx-background-color: transparent;
+}
+#datepick{
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+#taskbar{
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+}
