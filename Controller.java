@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,6 +44,10 @@ public class Controller implements Initializable {
     public TextField uid;
     @FXML
     public PasswordField upass;
+
+    @FXML
+    public HTMLEditor htmleditor;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,11 +99,15 @@ public class Controller implements Initializable {
         try {
             if (loginmodel.login(userid, userpass)) {
                 lblstatus.setText("Welcome Back!");
-                (Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+
+                ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
 
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/editor.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    HTMLEditor htmleditor = new HTMLEditor();
+                    htmleditor.setHtmlText("<body style  = 'background-color:transparent;'/>");
+
+                    Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
                     stage.show();
