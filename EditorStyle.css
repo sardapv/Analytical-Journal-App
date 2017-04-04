@@ -24,3 +24,24 @@
 #taskbar{
     -fx-background-color: rgba(255, 255, 255, 0.8);
 }
+.root { -fx-background-color: cornsilk; -fx-padding: 15; }
+#pbar {
+    -fx-text-box-border: forestgreen;
+    -fx-control-inner-background: #bdc7ff;
+    -fx-shadow-highlight-color: transparent;
+}
+.green-bar  { -fx-accent: green; -fx-text-box-border: forestgreen;
+    -fx-control-inner-background: palegreen;-fx-shadow-highlight-color: transparent;
+}
+.yellow-bar { -fx-accent: yellow;-fx-text-box-border: forestgreen;
+    -fx-control-inner-background: palegreen;-fx-shadow-highlight-color: transparent;
+}
+.orange-bar { -fx-accent: orange;-fx-text-box-border: forestgreen;
+    -fx-control-inner-background: palegreen;-fx-shadow-highlight-color: transparent;
+}
+.red-bar    { -fx-accent: red; -fx-text-box-border: forestgreen;
+    -fx-control-inner-background: palegreen;-fx-shadow-highlight-color: transparent;
+}
+#img{
+
+}

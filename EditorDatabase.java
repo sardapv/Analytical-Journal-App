@@ -1,20 +1,17 @@
 package sample;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginModel {
-
-
-    public static int id_from_table;
+/**
+ * Created by pranav on 04/04/17.
+ */
+public class EditorDatabase {
 
     Connection connection;
-    public LoginModel(){
+    public EditorDatabase(){
         try {
             connection = SqliteConnection.Connector();
             if (connection == null) {
@@ -32,35 +29,28 @@ public class LoginModel {
             return false;
         }
     }
-    public boolean login(String userid, String userpass) throws SQLException {
+    public void dailydata(Integer id,String title,String datechoosen,String matter,String htmlmatter,String mediapath,float rating) throws SQLException {
+
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String query = "SELECT * FROM user WHERE username = ? AND passkey = ?";
+        String query = "INSERT INTO Data(id,dateofday,title,matter,mediapath,rating,htmlmatter) VALUES (?,?,?,?,?,?,?)";
         try{
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,userid);
-            preparedStatement.setString(2,userpass);
-            resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                id_from_table = resultSet.getInt("id");
-                //System.out.println("HIHIH :"+id_from_table);
-                return true;
-            }
-            else {
-              // System.out.println(resultSet.next());
-                return false;
-            }
-        }
-        catch (SQLException e){
+            preparedStatement.setInt(1,id);
+            preparedStatement.setString(2,datechoosen);
+            preparedStatement.setString(3,title);
+            preparedStatement.setString(4,matter);
+            preparedStatement.setString(5,mediapath);
+            preparedStatement.setFloat(6,rating);
+            preparedStatement.setString(7,htmlmatter);
+            System.out.println(preparedStatement.executeUpdate());
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
         finally {
             preparedStatement.close();
-            resultSet.close();
         }
-        return false;
-
     }
-
 }

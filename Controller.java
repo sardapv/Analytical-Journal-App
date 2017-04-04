@@ -48,6 +48,7 @@ public class Controller implements Initializable {
     @FXML
     public HTMLEditor htmleditor;
 
+    public static int id_logged_in;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -121,7 +122,7 @@ public class Controller implements Initializable {
             lblstatus.setText("No");
             e.printStackTrace();
         }
-
+        id_logged_in = LoginModel.id_from_table;
     }
 
     public void signupbutton() throws IOException {
