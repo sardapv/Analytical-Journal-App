@@ -1,10 +1,8 @@
 package sample;
 
-import com.sun.javafx.scene.web.skin.HTMLEditorSkin;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -13,23 +11,16 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.web.HTMLEditor;
-
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.jsoup.Jsoup;
-
-import javax.imageio.ImageIO;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EditorController implements Initializable {
@@ -141,16 +132,25 @@ public class EditorController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root2));
             stage.show();
-          //  ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
     public void videopreview(){
-//query media path from database
-//play your media player code
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/videoplayer.fxml"));
+            Parent root3 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root3));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //query media path from database
+        //play your media player code
     }
+
     public void imagepreview() throws IOException {
         String date = datePicker.getValue().toString();
         String mediapath = globaladd ;//get mediapath based on date above

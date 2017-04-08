@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.javafx.scene.web.skin.HTMLEditorSkin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
