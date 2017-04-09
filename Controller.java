@@ -103,9 +103,9 @@ public class Controller implements Initializable {
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
 
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/editor.fxml"));
-                    HTMLEditor htmleditor = new HTMLEditor();
-                    htmleditor.setHtmlText("<body style  = 'background-color:transparent;'/>");
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/optionpane.fxml"));
+                    //HTMLEditor htmleditor = new HTMLEditor();
+                    //htmleditor.setHtmlText("<body style  = 'background-color:transparent;'/>");
 
                     Parent root1 = fxmlLoader.load();
                     Stage stage = new Stage();

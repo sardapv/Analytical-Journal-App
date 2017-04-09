@@ -2,8 +2,6 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.VideoTrack;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -29,10 +26,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.EventListener;
 import java.util.ResourceBundle;
 
-public class EditorController implements Initializable {
+public class ModifyingEditorController implements Initializable {
     @FXML
     public TextField title;
 
@@ -74,7 +70,6 @@ public class EditorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        datePicker.setValue(LocalDate.now());
 
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -116,6 +111,7 @@ public class EditorController implements Initializable {
            ;
     }
     String globaladd;
+
     public void mediastore() throws MalformedURLException {
         FileChooser fileChooser= new FileChooser();
         fileChooser.setTitle("Choose one media file");
@@ -137,6 +133,8 @@ public class EditorController implements Initializable {
         globaladd = address;
     }
     public void submit() throws SQLException {
+
+
         String titlename = title.getText();
         String date = datePicker.getValue().toString();
         double rating = slider.getValue();
@@ -170,8 +168,37 @@ public class EditorController implements Initializable {
     }
 
     public void imagepreview() throws IOException {
+
+        try {
+            connection = SqliteConnection.Connector();
+            if (connection == null) {
+                System.out.print("No connection");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM DATA WHERE id = ? AND dateofday = ?";
+        String mediapath = null;
+        try{
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Controller.id_logged_in);
+            preparedStatement.setString(2,datePicker.getValue().toString());
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                mediapath = resultSet.getString("mediapath");
+            }
+            else {
+                System.out.println("Nothing to set");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String date = datePicker.getValue().toString();
-        String mediapath = globaladd ;//get mediapath based on date above
+        //get mediapath based on date above
         Image image;
         if(mediapath == null)
             image = new Image("/sample/bg.jpg");
@@ -196,6 +223,45 @@ public class EditorController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    public Label datelabel;
+    public void datepickerAction(){
+        datelabel.setText("");
+        try {
+            connection = SqliteConnection.Connector();
+            if (connection == null) {
+                System.out.print("No connection");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM DATA WHERE id = ? AND dateofday = ?";
+        String mediapath = null;
+        try{
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Controller.id_logged_in);
+            preparedStatement.setString(2,datePicker.getValue().toString());
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                title.setText(resultSet.getString("title"));
+                htmleditor.setHtmlText(resultSet.getString("htmlmatter"));
+                slider.setValue(resultSet.getFloat("rating"));
+                pbar.setProgress(resultSet.getFloat("rating")/10);
+                Image image = new Image(resultSet.getString("mediapath"));
+                img.setImage(image);
+            }
+            else {
+                System.out.println("Nothing to set");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

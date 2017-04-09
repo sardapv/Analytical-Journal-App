@@ -18,6 +18,11 @@ import javafx.scene.media.MediaView;
 
 import java.net.URL;
 import javafx.util.Duration;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
@@ -33,10 +38,44 @@ public class VideoController implements Initializable {
     Slider timeslider;
     @FXML
     public Label time;
+    Connection connection;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String path = new File("/Users/pranav/Documents/Game of Thrones/Season 2/Game.of.Thrones.S02E10.HDTV.x264-ASAP.mp4").getAbsolutePath();
-        me = new Media(new File(path).toURI().toString());
+
+        try {
+            connection = SqliteConnection.Connector();
+            if (connection == null) {
+                System.out.print("NOT CONNECTED");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM DATA WHERE id = ? AND dateofday = ?";
+        String mediapath = null;
+        String datehere = EditorController.global_date;
+        try{
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Controller.id_logged_in);
+            if(datehere == null)
+                preparedStatement.setString(2,ModifyingEditorController.global_date);
+            else
+                preparedStatement.setString(2,EditorController.global_date);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                mediapath = resultSet.getString("mediapath");
+
+            }
+            else {
+                System.out.println("NO VIDEO");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        me = new Media(mediapath);
         mp = new MediaPlayer(me);
         mv.setMediaPlayer(mp);
         mp.setAutoPlay(true);

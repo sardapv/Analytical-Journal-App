@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@EditorStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditorController">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@ModifyingEditorStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ModifyingEditorController">
    <children>
       <MenuBar fx:id="taskbar" prefHeight="29.0" prefWidth="1149.0">
         <menus>
@@ -37,7 +37,7 @@
         </menus>
       </MenuBar>
       <ProgressBar fx:id="pbar" layoutX="26.0" layoutY="567.0" prefHeight="38.0" prefWidth="1103.0" progress="0.0" />
-      <DatePicker fx:id="datePicker" layoutX="827.0" layoutY="53.0" prefHeight="33.0" prefWidth="281.0" promptText="Choose Date" />
+      <DatePicker fx:id="datePicker" layoutX="827.0" layoutY="53.0" onAction="#datepickerAction" prefHeight="33.0" prefWidth="281.0" promptText="Choose Date" />
       <TextField fx:id="title" layoutX="26.0" layoutY="53.0" prefHeight="32.0" prefWidth="759.0" text="Title here">
          <font>
             <Font name="Arial Bold" size="16.0" />
@@ -135,5 +135,10 @@
             <Image url="@emojis/Very_sad_emoji_icon_png_42x42.png" />
          </image>
       </ImageView>
+      <Label fx:id="datelabel" alignment="CENTER" layoutX="797.0" layoutY="102.0" prefHeight="27.0" prefWidth="341.0" text="FIRST CHOOSE DATE HERE" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
