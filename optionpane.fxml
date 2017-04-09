@@ -14,7 +14,7 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></Button>
-      <Button layoutX="209.0" layoutY="143.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" text="All Logs">
+      <Button layoutX="209.0" layoutY="143.0" mnemonicParsing="false" onAction="#showAllLogs" prefHeight="37.0" prefWidth="108.0" text="All Logs">
          <font>
             <Font name="Arial" size="16.0" />
          </font></Button>

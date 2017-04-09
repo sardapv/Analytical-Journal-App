@@ -32,5 +32,16 @@ public class OptionPaneController {
             e.printStackTrace();
         }
     }
+    public void showAllLogs(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/Alllogs.fxml"));
+            Parent root3 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root3));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

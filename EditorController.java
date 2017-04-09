@@ -129,7 +129,7 @@ public class EditorController implements Initializable {
 
             Image image = new Image(address);
             img.setImage(image);
-        
+
         globaladd = address;
     }
     public void submit() throws SQLException {
