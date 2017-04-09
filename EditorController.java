@@ -127,13 +127,9 @@ public class EditorController implements Initializable {
         }
         System.out.println(file.getAbsolutePath());
 
-        File f = new File(file.getAbsolutePath());
-        String mimetype= new MimetypesFileTypeMap().getContentType(f);
-        String type = mimetype.split("/")[0];
-        if(type.equals("image")) {
             Image image = new Image(address);
             img.setImage(image);
-        }
+        
         globaladd = address;
     }
     public void submit() throws SQLException {

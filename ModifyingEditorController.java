@@ -50,6 +50,9 @@ public class ModifyingEditorController implements Initializable {
     @FXML
     public ProgressBar pbar;
 
+    @FXML
+    public Label datelabel;
+
     public SignUpModel signupmodel = new SignUpModel();
     public LoginModel loginmodel = new LoginModel();
 
@@ -123,23 +126,49 @@ public class ModifyingEditorController implements Initializable {
         }
         System.out.println(file.getAbsolutePath());
 
-        File f = new File(file.getAbsolutePath());
-        String mimetype= new MimetypesFileTypeMap().getContentType(f);
-        String type = mimetype.split("/")[0];
-        if(type.equals("image")) {
-            Image image = new Image(address);
-            img.setImage(image);
-        }
+        Image image = new Image(address);
+        img.setImage(image);
+
         globaladd = address;
     }
     public void submit() throws SQLException {
+        if(globaladd == null) {
+            try {
+                connection = SqliteConnection.Connector();
+                if (connection == null) {
+                    System.out.print("No connection");
+                }
+            }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            }
 
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM DATA WHERE id = ? AND dateofday = ?";
+        String mediapath = null;
+        try{
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Controller.id_logged_in);
+            preparedStatement.setString(2,datePicker.getValue().toString());
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                globaladd = resultSet.getString("mediapath");
+            }
+            else {
+                System.out.println("Nothing to set");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            connection.close();
+        }
+        }
 
         String titlename = title.getText();
         String date = datePicker.getValue().toString();
         double rating = slider.getValue();
         String matter = Jsoup.parse(htmleditor.getHtmlText()).text();
-        editorDatabase.dailydata(Controller.id_logged_in, titlename, date, matter, htmleditor.getHtmlText(), globaladd, (float) rating);
+        editorDatabase.modifyData(Controller.id_logged_in, titlename, date, matter, htmleditor.getHtmlText(), globaladd, (float) rating);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/success.fxml"));
@@ -167,7 +196,7 @@ public class ModifyingEditorController implements Initializable {
         //play your media player code
     }
 
-    public void imagepreview() throws IOException {
+    public void imagepreview() throws IOException, SQLException {
 
         try {
             connection = SqliteConnection.Connector();
@@ -195,6 +224,8 @@ public class ModifyingEditorController implements Initializable {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            connection.close();
         }
 
         String date = datePicker.getValue().toString();
@@ -224,9 +255,8 @@ public class ModifyingEditorController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    public Label datelabel;
-    public void datepickerAction(){
+
+    public void datepickerAction() throws SQLException {
         datelabel.setText("");
         try {
             connection = SqliteConnection.Connector();
@@ -251,14 +281,18 @@ public class ModifyingEditorController implements Initializable {
                 htmleditor.setHtmlText(resultSet.getString("htmlmatter"));
                 slider.setValue(resultSet.getFloat("rating"));
                 pbar.setProgress(resultSet.getFloat("rating")/10);
-                Image image = new Image(resultSet.getString("mediapath"));
-                img.setImage(image);
+                if(resultSet.getString("mediapath") != null) {
+                    Image image = new Image(resultSet.getString("mediapath"));
+                    img.setImage(image);
+                }
             }
             else {
                 System.out.println("Nothing to set");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            connection.close();
         }
 
 

@@ -73,6 +73,12 @@ public class VideoController implements Initializable {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         me = new Media(mediapath);
