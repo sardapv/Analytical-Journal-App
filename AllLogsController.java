@@ -3,8 +3,12 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -55,6 +59,22 @@ public class AllLogsController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public static String datehere;
+    public void showEditor(){
+        String record = listView.getSelectionModel().getSelectedItem().toString();
+        String temp[] = record.split("\\ | ");
+        datehere = temp[0];
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/modifying_editor.fxml"));
+            Parent root3 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root3));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

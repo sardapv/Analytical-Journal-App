@@ -26,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ModifyingEditorController implements Initializable {
@@ -73,7 +74,6 @@ public class ModifyingEditorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
                 pbar.setProgress(new_val.doubleValue()/10);
@@ -98,7 +98,13 @@ public class ModifyingEditorController implements Initializable {
                 bar.getStyleClass().add(barStyleClass);
             }
         });
-
+        if(AllLogsController.datehere !=null) {
+            try {
+                datepickerAction();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         if(signupmodel.isDbconnected()){
             //loginstatus.setText("Connected");
         }
@@ -255,7 +261,6 @@ public class ModifyingEditorController implements Initializable {
             e.printStackTrace();
         }
     }
-
     public void datepickerAction() throws SQLException {
         datelabel.setText("");
         try {
@@ -274,13 +279,20 @@ public class ModifyingEditorController implements Initializable {
         try{
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,Controller.id_logged_in);
-            preparedStatement.setString(2,datePicker.getValue().toString());
+            if(AllLogsController.datehere == null)
+                preparedStatement.setString(2,datePicker.getValue().toString());
+            else
+            preparedStatement.setString(2,AllLogsController.datehere);
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 title.setText(resultSet.getString("title"));
                 htmleditor.setHtmlText(resultSet.getString("htmlmatter"));
                 slider.setValue(resultSet.getFloat("rating"));
                 pbar.setProgress(resultSet.getFloat("rating")/10);
+                if(AllLogsController.datehere != null) {
+                    String[] temp = AllLogsController.datehere.split("\\-");
+                    datePicker.setValue(LocalDate.of(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]),Integer.parseInt(temp[2])));
+                }
                 if(resultSet.getString("mediapath") != null) {
                     Image image = new Image(resultSet.getString("mediapath"));
                     img.setImage(image);
