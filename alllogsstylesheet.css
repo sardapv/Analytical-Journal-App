@@ -1,0 +1,6 @@
+.root{
+    -fx-background-image: url("ALbg.jpeg");
+    -fx-background-repeat: inherit;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+}
