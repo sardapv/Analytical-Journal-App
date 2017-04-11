@@ -45,9 +45,10 @@ public class AllLogsController implements Initializable {
         try{
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,Controller.id_logged_in);
+            int count = 1;
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                mediapath = resultSet.getString("dateofday") + " | " + resultSet.getString("title");
+                mediapath = (count++) + " | "+ resultSet.getString("dateofday") + " | " + resultSet.getString("title");
                 list.add(mediapath);
             }
         } catch (SQLException e) {
@@ -65,7 +66,7 @@ public class AllLogsController implements Initializable {
     public void showEditor(){
         String record = listView.getSelectionModel().getSelectedItem().toString();
         String temp[] = record.split("\\ | ");
-        datehere = temp[0];
+        datehere = temp[2];
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/modifying_editor.fxml"));
@@ -73,8 +74,12 @@ public class AllLogsController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root3));
             stage.show();
+            stage.setOnCloseRequest(event -> {
+               datehere = null;
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

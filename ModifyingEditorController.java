@@ -195,11 +195,13 @@ public class ModifyingEditorController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root3));
             stage.show();
+            stage.setOnCloseRequest(event -> {
+                VideoController.stoper.stop();
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //query media path from database
-        //play your media player code
+
     }
 
     public void imagepreview() throws IOException, SQLException {
@@ -271,7 +273,11 @@ public class ModifyingEditorController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        title.setText("Title Here");
+        htmleditor.setHtmlText("");
+        slider.setValue(0);
+        pbar.setProgress(0);
+        img.setImage(null);
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String query = "SELECT * FROM DATA WHERE id = ? AND dateofday = ?";
@@ -282,7 +288,7 @@ public class ModifyingEditorController implements Initializable {
             if(AllLogsController.datehere == null)
                 preparedStatement.setString(2,datePicker.getValue().toString());
             else
-            preparedStatement.setString(2,AllLogsController.datehere);
+                preparedStatement.setString(2,AllLogsController.datehere);
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 title.setText(resultSet.getString("title"));

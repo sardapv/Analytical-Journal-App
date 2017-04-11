@@ -39,6 +39,8 @@ public class VideoController implements Initializable {
     @FXML
     public Label time;
     Connection connection;
+
+    public static MediaPlayer stoper;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -85,6 +87,7 @@ public class VideoController implements Initializable {
         mp = new MediaPlayer(me);
         mv.setMediaPlayer(mp);
         mp.setAutoPlay(true);
+        stoper = mp;
         DoubleProperty width = mv.fitWidthProperty();
         DoubleProperty height = mv.fitHeightProperty();
         width.bind(Bindings.selectDouble(mv.sceneProperty(),"width"));

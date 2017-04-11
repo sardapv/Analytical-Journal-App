@@ -158,6 +158,9 @@ public class EditorController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root3));
             stage.show();
+            stage.setOnCloseRequest(event -> {
+                VideoController.stoper.stop();
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
