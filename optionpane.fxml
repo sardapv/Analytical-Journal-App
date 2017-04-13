@@ -10,7 +10,7 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></Button>
-      <Button layoutX="365.0" layoutY="227.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" text="push2cloud">
+      <Button layoutX="365.0" layoutY="227.0" mnemonicParsing="false" onAction="#push2Cloud" prefHeight="37.0" prefWidth="108.0" text="push2cloud">
          <font>
             <Font name="Arial" size="16.0" />
          </font></Button>
