@@ -34,12 +34,12 @@ public class SignUpModel {
             return false;
         }
     }
-    public void signupuser(String fname,String lname,String gmail,String dob,String phonenumber,String gender,String description, String loginid, String key) throws SQLException {
+    public void signupuser(String fname,String lname,String gmail,String dob,String phonenumber,String gender,String description, String loginid, String key, String backupdirec) throws SQLException {
 
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String query = "INSERT INTO user(firstname,lastname,email,dob,phonenumber,gender,about,username,passkey) VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO user(firstname,lastname,email,dob,phonenumber,gender,about,username,passkey,backupdir) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try{
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,fname);
@@ -51,6 +51,7 @@ public class SignUpModel {
             preparedStatement.setString(7,description);
             preparedStatement.setString(8,loginid);
             preparedStatement.setString(9,key);
+            preparedStatement.setString(10,backupdirec);
             System.out.println(preparedStatement.executeUpdate());
 
         } catch (SQLException e) {

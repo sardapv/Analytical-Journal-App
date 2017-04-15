@@ -43,6 +43,10 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 
 /**
@@ -65,6 +69,7 @@ public class DriveSample {
     public Label downloadstatus;
     @FXML
     public Button btn;
+    static Connection connection;
 
   /**
    * Be sure to specify the name of your application. If the application name is {@code null} or
@@ -72,9 +77,10 @@ public class DriveSample {
    */
   private static final String APPLICATION_NAME = "D A Y O N E";
 
-  private static final String UPLOAD_FILE_PATH = "/Users/pranav/IdeaProjects/NewDayONE/src/main/resources/modbg.jpeg";
-  private static final String DIR_FOR_DOWNLOADS = "/Users/pranav/diary";
-  private static final java.io.File UPLOAD_FILE = new java.io.File(UPLOAD_FILE_PATH);
+  private static  String UPLOAD_FILE_PATH = "";
+  private static  String DIR_FOR_DOWNLOADS = "";
+  private static  java.io.File UPLOAD_FILE = new java.io.File(UPLOAD_FILE_PATH);
+
 
   /** Directory to store user credentials. */
   private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"), ".store/drive_sample");
@@ -158,19 +164,93 @@ public class DriveSample {
   }
 
   /** Uploads a file using either resumable or direct media upload. */
-  private static File uploadFile(boolean useDirectUpload) throws IOException {
-    File fileMetadata = new File();
-    fileMetadata.setName(UPLOAD_FILE.getName());
+  private static File uploadFile(boolean useDirectUpload) throws IOException, SQLException {
+      try {
+          connection = SqliteConnection.Connector();
+          if (connection == null) {
+              System.out.print("No connection");
+          }
+      }catch (ClassNotFoundException e) {
+          e.printStackTrace();
+      }
+      File tempfile = null;
+      PreparedStatement preparedStatement = null;
+      ResultSet resultSet = null;
+      String query = "SELECT * FROM USER WHERE id = ?";
+      String mediapath = null;
+      try{
+          preparedStatement = connection.prepareStatement(query);
+          preparedStatement.setInt(1,Controller.id_logged_in);
+          resultSet = preparedStatement.executeQuery();
+          if(resultSet.next()){
+              UPLOAD_FILE_PATH  = resultSet.getString("backupdir");
+          }
+          else {
+              System.out.println("Nothing to set");
+          }
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+      try {
+          String query2 = "SELECT * FROM DATA WHERE id = ?";
+          preparedStatement = connection.prepareStatement(query2);
+          preparedStatement.setInt(1,Controller.id_logged_in);
+          resultSet = preparedStatement.executeQuery();
+          int count = 1;
+          while (resultSet.next()){
+              String filetopbeuploaded = UPLOAD_FILE_PATH+"/"+resultSet.getString("dateofday")+ " | "+ resultSet.getString("title")+".txt";
+              java.io.File yourFile = new java.io.File(filetopbeuploaded);
+              if(!yourFile.exists())
+                  yourFile.createNewFile();
+              FileWriter fileWriter = new FileWriter(filetopbeuploaded);
 
-    FileContent mediaContent = new FileContent("image/jpeg", UPLOAD_FILE);
+              fileWriter.write("\nDate : "+resultSet.getString("dateofday"));
+              fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+              fileWriter.write("\n\nTitle : "+resultSet.getString("title"));
+              fileWriter.write("\n\n=======================================================================================");
+              fileWriter.write("\n\nStory of the day : \n\n\t "+resultSet.getString("matter"));
+              fileWriter.write("\n\n=======================================================================================");
+              fileWriter.write("\n\nMy Day on scale of 0 to 10 : "+resultSet.getFloat("rating"));
+              float temp = resultSet.getFloat("rating");
+              if(temp <= 3){
+                  fileWriter.write("( SAD )");
+              }
+              else if(temp <= 6 && temp > 3){
+                  fileWriter.write("( MODERATE )");
+              }
+              else if(temp <=10 && temp >6){
+                  fileWriter.write("( HAPPY )");
+              }
+              fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+              fileWriter.write("\n\nMedia memory : "+resultSet.getString("mediapath"));
+              fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+              fileWriter.close();
 
-    Drive.Files.Create insert = drive.files().create(fileMetadata, mediaContent);
-    MediaHttpUploader uploader = insert.getMediaHttpUploader();
-    uploader.setDirectUploadEnabled(useDirectUpload);
+              java.io.File UPLOAD_FILE = new java.io.File(filetopbeuploaded);
 
-    uploader.setProgressListener(new FileUploadProgressListener());
+              File fileMetadata = new File();
+              fileMetadata.setName(UPLOAD_FILE.getName());
 
-    return insert.execute();
+              FileContent mediaContent = new FileContent("text/text", UPLOAD_FILE);
+
+              Drive.Files.Create insert = drive.files().create(fileMetadata, mediaContent);
+              MediaHttpUploader uploader = insert.getMediaHttpUploader();
+              uploader.setDirectUploadEnabled(useDirectUpload);
+
+              uploader.setProgressListener(new FileUploadProgressListener());
+
+              tempfile = insert.execute();
+
+
+          }
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+
+      finally {
+          connection.close();
+      }
+    return tempfile;
   }
 
     public boolean netIsAvailable()

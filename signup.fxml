@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="451.0" stylesheets="@signupdesign.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="451.0" stylesheets="@signupdesign.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <TextField fx:id="firstname" layoutX="88.0" layoutY="55.0" prefHeight="27.0" prefWidth="161.0" promptText="First Name" />
       <TextField fx:id="lastname" layoutX="261.0" layoutY="55.0" prefHeight="27.0" prefWidth="161.0" promptText="Last Name" />
@@ -61,18 +61,19 @@
       <TextField fx:id="username" layoutX="141.0" layoutY="481.0" promptText="Username" />
       <PasswordField fx:id="password" alignment="TOP_LEFT" layoutX="140.0" layoutY="522.0" promptText="Password" />
       <PasswordField fx:id="cpassword" layoutX="139.0" layoutY="563.0" promptText="Confirm Password" />
-      <Button fx:id="submit" layoutX="192.0" layoutY="631.0" mnemonicParsing="false" onAction="#submitit" text="Submit">
+      <Button fx:id="submit" layoutX="192.0" layoutY="677.0" mnemonicParsing="false" onAction="#submitit" text="Submit">
          <effect>
             <Reflection />
          </effect></Button>
-      <Label fx:id="loginstatus" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="596.0" prefHeight="32.0" prefWidth="368.0" wrapText="true">
+      <Label fx:id="loginstatus" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="639.0" prefHeight="32.0" prefWidth="368.0" text="Please choose backup directory" wrapText="true">
          <font>
-            <Font name="Times New Roman Bold" size="22.0" />
+            <Font name="Times New Roman Bold" size="17.0" />
          </font></Label>
       <Label layoutX="148.0" layoutY="444.0" text="Account Details" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
+      <Button layoutX="139.0" layoutY="604.0" mnemonicParsing="false" onAction="#backupDirectoryChoose" prefHeight="27.0" prefWidth="167.0" text="Backup Directory" />
    </children>
 </AnchorPane>

@@ -8,8 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -85,7 +88,7 @@ public class Controller implements Initializable {
             gender = other.getId();
         }
         if(confirmpassword.equals(key)) {
-            signupmodel.signupuser(fname, lname, gmail, dob, phonenumber, gender, description, loginid, key);
+            signupmodel.signupuser(fname, lname, gmail, dob, phonenumber, gender, description, loginid, key, backupdir);
             loginstatus.setText("Successfully Registered!");
         }
         else {
@@ -134,6 +137,19 @@ public class Controller implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public String backupdir;
+    public void backupDirectoryChoose(){
+        DirectoryChooser directoryChooser= new DirectoryChooser();
+        directoryChooser.setTitle("Choose one media file");
+        //Show open file dialog
+        String address = null;
+        File file = directoryChooser.showDialog(new Stage());
+        if (file != null) {
+            address = file.getAbsolutePath();
+        }
+        loginstatus.setText(address);
+        backupdir =address;
     }
 
 

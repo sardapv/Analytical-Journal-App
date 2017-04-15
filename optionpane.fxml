@@ -4,27 +4,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="547.0" stylesheets="@optionpanestyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionPaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@optionpanestyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionPaneController">
    <children>
-      <Button layoutX="65.0" layoutY="62.0" mnemonicParsing="false" onAction="#writeNewLog" prefHeight="37.0" prefWidth="108.0" text="Write new">
+      <Button layoutX="220.0" layoutY="155.0" mnemonicParsing="false" onAction="#writeNewLog" prefHeight="74.0" prefWidth="216.0" text="Write new">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial" size="20.0" />
          </font></Button>
-      <Button layoutX="365.0" layoutY="227.0" mnemonicParsing="false" onAction="#push2Cloud" prefHeight="37.0" prefWidth="108.0" text="push2cloud">
+      <Button layoutX="707.0" layoutY="432.0" mnemonicParsing="false" onAction="#push2Cloud" prefHeight="74.0" prefWidth="216.0" text="push2cloud">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial" size="20.0" />
          </font></Button>
-      <Button layoutX="209.0" layoutY="143.0" mnemonicParsing="false" onAction="#showAllLogs" prefHeight="37.0" prefWidth="108.0" text="All Logs">
+      <Button layoutX="460.0" layoutY="288.0" mnemonicParsing="false" onAction="#showAllLogs" prefHeight="74.0" prefWidth="216.0" text="All Logs">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial" size="20.0" />
          </font></Button>
-      <Button layoutX="365.0" layoutY="62.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" text="Analysis">
+      <Button layoutX="710.0" layoutY="146.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="216.0" text="Analysis">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial" size="20.0" />
          </font></Button>
-      <Button layoutX="65.0" layoutY="227.0" mnemonicParsing="false" onAction="#modifyOldLog" prefHeight="37.0" prefWidth="108.0" text="Modify">
+      <Button layoutX="236.0" layoutY="428.0" mnemonicParsing="false" onAction="#modifyOldLog" prefHeight="74.0" prefWidth="216.0" text="Modify">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial" size="20.0" />
          </font>
       </Button>
    </children>
