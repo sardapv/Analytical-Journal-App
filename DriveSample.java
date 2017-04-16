@@ -212,13 +212,13 @@ public class DriveSample {
               fileWriter.write("\n\n=======================================================================================");
               fileWriter.write("\n\nMy Day on scale of 0 to 10 : "+resultSet.getFloat("rating"));
               float temp = resultSet.getFloat("rating");
-              if(temp <= 3){
+              if(temp <= 4){
                   fileWriter.write("( SAD )");
               }
-              else if(temp <= 6 && temp > 3){
+              else if(temp <= 7 && temp > 4){
                   fileWriter.write("( MODERATE )");
               }
-              else if(temp <=10 && temp >6){
+              else if(temp <=10 && temp >7){
                   fileWriter.write("( HAPPY )");
               }
               fileWriter.write("\n\n---------------------------------------------------------------------------------------");
