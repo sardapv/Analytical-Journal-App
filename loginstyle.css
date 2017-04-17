@@ -1,9 +1,0 @@
-#ap{
-    -fx-background-image: url("modbg.jpeg");
-    -fx-background-repeat: inherit;
-    -fx-background-position: center;
-    -fx-background-size: stretch;
-}
-.text-field,.button,.password-field{
-    -fx-background-color: white;
-}

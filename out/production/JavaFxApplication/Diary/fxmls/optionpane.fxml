@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@../css/optionpanestyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.OptionPaneController">
+   <children>
+      <Button layoutX="219.0" layoutY="129.0" mnemonicParsing="false" onAction="#writeNewLog" prefHeight="74.0" prefWidth="216.0" text="Write new" textFill="#790707">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Button layoutX="720.0" layoutY="411.0" mnemonicParsing="false" onAction="#push2Cloud" prefHeight="74.0" prefWidth="216.0" text="push2cloud" textFill="#790707">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Button layoutX="463.0" layoutY="256.0" mnemonicParsing="false" onAction="#showAllLogs" prefHeight="74.0" prefWidth="216.0" text="All Logs" textFill="#790707">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Button layoutX="719.0" layoutY="126.0" mnemonicParsing="false" onAction="#analyse" prefHeight="74.0" prefWidth="216.0" text="Analysis" textFill="#790707">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Button layoutX="209.0" layoutY="413.0" mnemonicParsing="false" onAction="#modifyOldLog" prefHeight="74.0" prefWidth="216.0" text="Modify" textFill="#790707">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button fx:id="logout" layoutX="515.0" layoutY="512.0" mnemonicParsing="false" onAction="#logoutwindow" prefHeight="74.0" prefWidth="100.0" text="Logout" textFill="#790707">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Label layoutX="478.0" layoutY="78.0" text="Welcome Back !">
+         <font>
+            <Font name="Times New Roman Bold" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

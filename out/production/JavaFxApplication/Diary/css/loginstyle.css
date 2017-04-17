@@ -1,0 +1,15 @@
+#ap{
+    -fx-background-image: url("/Diary/background/modbg.jpeg");
+    -fx-background-repeat: inherit;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+}
+.text-field,.button,.password-field{
+    -fx-background-color: white;
+}
+.button:hover{
+    -fx-background-color: rgba(0, 182, 255, 0.9);
+}
+.button:pressed{
+    -fx-background-color: white;
+}
