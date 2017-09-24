@@ -1,13 +1,13 @@
 
-##Analytical-Journal-App
+##Analytical-Journal-App (Note!T)
 ---------------------------
 
 **IDE :** Jetbrains Intellij IDEA
 
-**GUI :** Gluon JavaFX Scene Builder
+**GUI :** JavaFX
 
 **CLOUD** : Google-App-Engine (Drive)
 
 **P.LANG :** Java
 
-**Database :** SQLite
+**Database :** SQLite, text files
