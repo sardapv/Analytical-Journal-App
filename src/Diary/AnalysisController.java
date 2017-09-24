@@ -59,6 +59,7 @@ public class AnalysisController {
         allDates.clear();
         allDatesString.clear();
         System.gc();
+
         float dayrate = 0;
         try {
             connection = SqliteConnection.Connector();

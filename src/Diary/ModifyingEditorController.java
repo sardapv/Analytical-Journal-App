@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -103,6 +104,13 @@ public class ModifyingEditorController implements Initializable {
                 e.printStackTrace();
             }
         }
+        if(WC.datehere !=null){
+            try {
+                datepickerActionforSearch();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         if(signupmodel.isDbconnected()){
             //loginstatus.setText("Connected");
         }
@@ -135,7 +143,7 @@ public class ModifyingEditorController implements Initializable {
 
         globaladd = address;
     }
-    public void submit() throws SQLException {
+    public void submit() throws SQLException, IOException {
         if(globaladd == null) {
             try {
                 connection = SqliteConnection.Connector();
@@ -174,6 +182,7 @@ public class ModifyingEditorController implements Initializable {
         String matter = Jsoup.parse(htmleditor.getHtmlText()).text();
         editorDatabase.modifyData(Controller.id_logged_in, titlename, date, matter, htmleditor.getHtmlText(), globaladd, (float) rating);
 
+        print(titlename, date, matter, globaladd, (float) rating);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmls/success.fxml"));
             Parent root2 = fxmlLoader.load();
@@ -184,6 +193,58 @@ public class ModifyingEditorController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+    public void print(String titlename, String date, String matter, String globaladd, float rating) throws SQLException, IOException {
+        try {
+            connection = SqliteConnection.Connector();
+            if (connection == null) {
+                System.out.print("No connection");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        File tempfile = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM USER WHERE id = ?";
+        String UPLOAD_FILE_PATH = null;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, Controller.id_logged_in);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                UPLOAD_FILE_PATH = resultSet.getString("backupdir");
+            } else {
+                System.out.println("Nothing to set");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String filetopbeuploaded = UPLOAD_FILE_PATH + "/" + date + " | " + titlename;
+        java.io.File yourFile = new java.io.File(filetopbeuploaded);
+        if (!yourFile.exists())
+            yourFile.createNewFile();
+        FileWriter fileWriter = new FileWriter(filetopbeuploaded);
+
+        fileWriter.write("\nDate : " + date);
+        fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+        fileWriter.write("\n\nTitle : " + titlename);
+        fileWriter.write("\n\n=======================================================================================");
+        fileWriter.write("\n\nStory of the day : \n\n\t " + matter);
+        fileWriter.write("\n\n=======================================================================================");
+        fileWriter.write("\n\nMy Day on scale of 0 to 10 : " + rating);
+        float temp = rating;
+        if (temp <= 4) {
+            fileWriter.write("( SAD )");
+        } else if (temp <= 7 && temp > 4) {
+            fileWriter.write("( MODERATE )");
+        } else if (temp <= 10 && temp > 7) {
+            fileWriter.write("( HAPPY )");
+        }
+        fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+        fileWriter.write("\n\nMedia memory : " + globaladd);
+        fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+        fileWriter.close();
     }
     public void videopreview(){
         global_date = datePicker.getValue().toString();
@@ -310,8 +371,56 @@ public class ModifyingEditorController implements Initializable {
         }finally {
             connection.close();
         }
-
-
+    }
+    public void datepickerActionforSearch() throws SQLException {
+        datelabel.setText("");
+        try {
+            connection = SqliteConnection.Connector();
+            if (connection == null) {
+                System.out.print("No connection");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        title.setText("Title Here");
+        htmleditor.setHtmlText("");
+        slider.setValue(0);
+        pbar.setProgress(0);
+        img.setImage(null);
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM DATA WHERE id = ? AND dateofday = ?";
+        String mediapath = null;
+        try{
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Controller.id_logged_in);
+            if(WC.datehere == null)
+                preparedStatement.setString(2,datePicker.getValue().toString());
+            else
+                preparedStatement.setString(2,WC.datehere);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                title.setText(resultSet.getString("title"));
+                htmleditor.setHtmlText(resultSet.getString("htmlmatter"));
+                slider.setValue(resultSet.getFloat("rating"));
+                pbar.setProgress(resultSet.getFloat("rating")/10);
+                if(WC.datehere != null) {
+                    String[] temp = WC.datehere.split("\\-");
+                    datePicker.setValue(LocalDate.of(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]),Integer.parseInt(temp[2])));
+                }
+                if(resultSet.getString("mediapath") != null) {
+                    Image image = new Image(resultSet.getString("mediapath"));
+                    img.setImage(image);
+                }
+            }
+            else {
+                System.out.println("Nothing to set");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            connection.close();
+        }
     }
 
 }

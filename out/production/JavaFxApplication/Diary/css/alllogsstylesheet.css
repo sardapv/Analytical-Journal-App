@@ -1,9 +1,0 @@
-.root{
-    -fx-background-image: url("/Diary/background/albg.jpeg");
-    -fx-background-repeat: inherit;
-    -fx-background-position: center;
-    -fx-background-size: stretch;
-}
-#listView:hover{
-    -fx-background-color: rgba(0, 182, 255, 0.9);
-}

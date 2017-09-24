@@ -35,7 +35,6 @@ public class SignUpModel {
 
 
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         String query = "INSERT INTO user(firstname,lastname,email,dob,phonenumber,gender,about,username,passkey,backupdir) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try{
             preparedStatement = connection.prepareStatement(query);

@@ -13,67 +13,106 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="451.0" stylesheets="@../css/signupdesign.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.Controller">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@../css/signupdesign.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.Controller">
    <children>
-      <TextField fx:id="firstname" layoutX="88.0" layoutY="55.0" prefHeight="27.0" prefWidth="161.0" promptText="First Name" />
-      <TextField fx:id="lastname" layoutX="261.0" layoutY="55.0" prefHeight="27.0" prefWidth="161.0" promptText="Last Name" />
-      <Label layoutX="29.0" layoutY="60.0" text="Name" textFill="WHITE">
+      <TextField fx:id="firstname" layoutX="398.0" layoutY="56.0" opacity="0.86" prefHeight="27.0" prefWidth="190.0" promptText="First Name">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font size="16.0" />
+         </font></TextField>
+      <TextField fx:id="lastname" layoutX="600.0" layoutY="56.0" opacity="0.86" prefHeight="27.0" prefWidth="203.0" promptText="Last Name">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <Label layoutX="331.0" layoutY="61.0" text="Name" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="email" layoutX="88.0" layoutY="101.0" prefHeight="27.0" prefWidth="335.0" promptText="example@example.com" />
-      <Label layoutX="28.0" layoutY="105.0" text="Email" textFill="WHITE">
+      <TextField fx:id="email" layoutX="398.0" layoutY="102.0" opacity="0.86" prefHeight="27.0" prefWidth="405.0" promptText="example@example.com">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font size="16.0" />
+         </font></TextField>
+      <Label layoutX="331.0" layoutY="107.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="phno" layoutX="88.0" layoutY="145.0" prefHeight="27.0" prefWidth="335.0" promptText="eg. 9988776655" />
-      <Label layoutX="27.0" layoutY="149.0" text="Ph. No." textFill="WHITE">
+      <TextField fx:id="phno" layoutX="398.0" layoutY="146.0" opacity="0.86" prefHeight="27.0" prefWidth="406.0" promptText="eg. 9988776655">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font size="16.0" />
+         </font></TextField>
+      <Label layoutX="331.0" layoutY="151.0" text="Ph. No." textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="193.0" text="Gender" textFill="WHITE">
+      <Label layoutX="331.0" layoutY="195.0" text="Gender" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <RadioButton fx:id="male" layoutX="125.0" layoutY="193.0" mnemonicParsing="false" text="Male" textFill="WHITE">
+      <RadioButton fx:id="male" layoutX="402.0" layoutY="194.0" mnemonicParsing="false" text="Male" textFill="WHITE">
          <toggleGroup>
             <ToggleGroup fx:id="mygrp" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="female" layoutX="231.0" layoutY="193.0" mnemonicParsing="false" text="Female" textFill="WHITE" toggleGroup="$mygrp" />
-      <RadioButton fx:id="other" layoutX="346.0" layoutY="193.0" mnemonicParsing="false" text="Other" textFill="WHITE" toggleGroup="$mygrp" />
-      <TextArea fx:id="descrip" layoutX="27.0" layoutY="282.0" prefHeight="130.0" prefWidth="397.0" promptText="Tell me about yourself" />
-      <Label layoutX="92.0" layoutY="237.0" text="Date of Birth" textFill="WHITE">
+         </toggleGroup>
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font size="14.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="female" layoutX="508.0" layoutY="194.0" mnemonicParsing="false" text="Female" textFill="WHITE" toggleGroup="$mygrp">
+         <font>
+            <Font size="14.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="other" layoutX="623.0" layoutY="194.0" mnemonicParsing="false" text="Other" textFill="WHITE" toggleGroup="$mygrp">
+         <font>
+            <Font size="14.0" />
+         </font></RadioButton>
+      <TextArea fx:id="descrip" layoutX="325.0" layoutY="283.0" opacity="0.86" prefHeight="67.0" prefWidth="481.0" promptText="Tell me about yourself">
+         <font>
+            <Font size="16.0" />
+         </font></TextArea>
+      <Label layoutX="335.0" layoutY="237.0" text="DOB" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePicker" editable="false" layoutX="191.0" layoutY="232.0" prefHeight="27.0" prefWidth="183.0" promptText="Select Date" />
-      <Separator layoutY="425.0" prefHeight="19.0" prefWidth="449.0" />
-      <Label layoutX="149.0" layoutY="14.0" text="Personal Details" textFill="WHITE">
+      <DatePicker fx:id="datePicker" editable="false" layoutX="400.0" layoutY="235.0" opacity="0.86" prefHeight="27.0" prefWidth="187.0" promptText="Select Date" />
+      <Separator layoutX="268.0" layoutY="365.0" prefHeight="19.0" prefWidth="608.0" />
+      <Label layoutX="489.0" layoutY="15.0" text="Personal Details" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="141.0" layoutY="481.0" promptText="Username" />
-      <PasswordField fx:id="password" alignment="TOP_LEFT" layoutX="140.0" layoutY="522.0" promptText="Password" />
-      <PasswordField fx:id="cpassword" layoutX="139.0" layoutY="563.0" promptText="Confirm Password" />
-      <Button fx:id="submit" layoutX="192.0" layoutY="677.0" mnemonicParsing="false" onAction="#submitit" text="Submit">
+      <TextField fx:id="username" alignment="CENTER" layoutX="465.0" layoutY="419.0" opacity="0.86" prefHeight="27.0" prefWidth="226.0" promptText="Username">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <PasswordField fx:id="password" alignment="CENTER" layoutX="464.0" layoutY="461.0" opacity="0.86" prefHeight="27.0" prefWidth="226.0" promptText="Password">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
+      <PasswordField fx:id="cpassword" alignment="CENTER" layoutX="465.0" layoutY="504.0" opacity="0.86" prefHeight="27.0" prefWidth="226.0" promptText="Confirm Password">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
+      <Button fx:id="submit" layoutX="544.0" layoutY="598.0" mnemonicParsing="false" onAction="#submitit" opacity="0.86" text="Submit">
          <effect>
             <Reflection />
-         </effect></Button>
-      <Label fx:id="loginstatus" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="639.0" prefHeight="32.0" prefWidth="368.0" text="Please choose backup directory" wrapText="true">
+         </effect>
          <font>
-            <Font name="Times New Roman Bold" size="17.0" />
+            <Font size="16.0" />
+         </font></Button>
+      <Label fx:id="loginstatus" alignment="CENTER" contentDisplay="CENTER" layoutX="664.0" layoutY="549.0" prefHeight="40.0" prefWidth="92.0" text="It is for storage purpose" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
          </font></Label>
-      <Label layoutX="148.0" layoutY="444.0" text="Account Details" textFill="WHITE">
+      <Label layoutX="489.0" layoutY="384.0" text="Account Details" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
-      <Button layoutX="139.0" layoutY="604.0" mnemonicParsing="false" onAction="#backupDirectoryChoose" prefHeight="27.0" prefWidth="167.0" text="Backup Directory" />
+      <Button layoutX="506.0" layoutY="553.0" mnemonicParsing="false" onAction="#backupDirectoryChoose" opacity="0.86" prefHeight="32.0" prefWidth="155.0" text="Backup Directory">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
    </children>
 </AnchorPane>

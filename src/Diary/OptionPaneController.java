@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
 public class OptionPaneController implements Initializable {
     @FXML
     public Button logout;
+    @FXML
+    public Button search;
 
     public void writeNewLog(){
         try {
@@ -164,5 +166,13 @@ public class OptionPaneController implements Initializable {
         logout.setShape(new Circle(60));
         logout.setMinSize(120,120);
         logout.setMaxSize(120,120);
+    }
+    public void search(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmls/search.fxml"));
+        Parent root3 = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Search in Note!T");
+        stage.setScene(new Scene(root3));
+        stage.show();
     }
 }

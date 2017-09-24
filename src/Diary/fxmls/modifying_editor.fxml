@@ -135,7 +135,7 @@
             <Image url="@../emojis/Very_sad_emoji_icon_png_42x42.png" />
          </image>
       </ImageView>
-      <Label fx:id="datelabel" alignment="CENTER" layoutX="797.0" layoutY="102.0" prefHeight="27.0" prefWidth="341.0" text="FIRST CHOOSE DATE HERE" textFill="WHITE">
+      <Label fx:id="datelabel" alignment="CENTER" layoutX="797.0" layoutY="102.0" prefHeight="27.0" prefWidth="341.0" text="PLEASE SELECT DATE" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>

@@ -5,11 +5,11 @@
     -fx-background-size: stretch;
 }
 .button{
-    -fx-background-color: rgba(255, 219, 182, 0.57);
+    -fx-background-color: rgba(0, 14, 68, 0.57);
 }
 .button:hover{
-    -fx-background-color: rgba(255, 171, 25, 0.9);
+    -fx-background-color: rgba(1, 25, 112, 0.9);
 }
 .button:pressed{
-    -fx-background-color: white;
+    -fx-background-color: rgba(0, 14, 68, 0.9);
 }

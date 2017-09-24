@@ -26,7 +26,7 @@
       </PasswordField>
       <Label fx:id="lblstatus" alignment="CENTER" contentDisplay="CENTER" layoutX="401.0" layoutY="380.0" prefHeight="35.0" prefWidth="336.0" textFill="#00ff2f">
          <font>
-            <Font name="Times New Roman" size="22.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Label>
       <Button layoutX="586.0" layoutY="427.0" mnemonicParsing="false" onAction="#signupbutton" prefHeight="35.0" prefWidth="99.0" text="Sign Up">
@@ -34,12 +34,12 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="558.0" layoutY="125.0" prefHeight="35.0" prefWidth="127.0" text="O N E" textFill="#f0ef00">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="584.0" layoutY="127.0" prefHeight="42.0" prefWidth="49.0" text="!T" textFill="#f0ef00">
          <font>
             <Font name="Arial Bold" size="36.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="469.0" layoutY="125.0" prefHeight="35.0" prefWidth="99.0" text="D A Y" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="503.0" layoutY="127.0" prefHeight="35.0" prefWidth="99.0" text="Note" textFill="WHITE">
          <font>
             <Font name="Arial" size="36.0" />
          </font>

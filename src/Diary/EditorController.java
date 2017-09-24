@@ -17,10 +17,13 @@ import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -125,12 +128,13 @@ public class EditorController implements Initializable {
 
         globaladd = address;
     }
-    public void submit() throws SQLException {
+    public void submit() throws SQLException, IOException {
         String titlename = title.getText();
         String date = datePicker.getValue().toString();
         double rating = slider.getValue();
         String matter = Jsoup.parse(htmleditor.getHtmlText()).text();
         editorDatabase.dailydata(Controller.id_logged_in, titlename, date, matter, htmleditor.getHtmlText(), globaladd, (float) rating);
+        print(titlename, date, matter, globaladd, (float) rating);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmls/success.fxml"));
@@ -141,6 +145,60 @@ public class EditorController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+    public void print(String titlename, String date, String matter, String globaladd, float rating) throws SQLException, IOException {
+        try {
+            connection = SqliteConnection.Connector();
+            if (connection == null) {
+                System.out.print("No connection");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        File tempfile = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM USER WHERE id = ?";
+        String UPLOAD_FILE_PATH = null;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, Controller.id_logged_in);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                UPLOAD_FILE_PATH = resultSet.getString("backupdir");
+            } else {
+                System.out.println("Nothing to set");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String filetopbeuploaded = UPLOAD_FILE_PATH + "/" + date + " | " + titlename;
+                java.io.File yourFile = new java.io.File(filetopbeuploaded);
+                if (!yourFile.exists())
+                    yourFile.createNewFile();
+                FileWriter fileWriter = new FileWriter(filetopbeuploaded);
+
+                fileWriter.write("\nDate : " + date);
+                fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+                fileWriter.write("\n\nTitle : " + titlename);
+                fileWriter.write("\n\n=======================================================================================");
+                fileWriter.write("\n\nStory of the day : \n\n\t " + matter);
+                fileWriter.write("\n\n=======================================================================================");
+                fileWriter.write("\n\nMy Day on scale of 0 to 10 : " + rating);
+                float temp = rating;
+                if (temp <= 4) {
+                    fileWriter.write("( SAD )");
+                } else if (temp <= 7 && temp > 4) {
+                    fileWriter.write("( MODERATE )");
+                } else if (temp <= 10 && temp > 7) {
+                    fileWriter.write("( HAPPY )");
+                }
+                fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+                fileWriter.write("\n\nMedia memory : " + globaladd);
+                fileWriter.write("\n\n---------------------------------------------------------------------------------------");
+                fileWriter.close();
 
     }
     public void videopreview(){

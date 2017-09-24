@@ -53,7 +53,6 @@ public class LoginModel {
         }
 
         finally {
-            preparedStatement.close();
             resultSet.close();
         }
         return false;

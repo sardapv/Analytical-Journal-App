@@ -7,25 +7,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="600.0" stylesheets="@../css/alllogsstylesheet.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.AllLogsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@../css/alllogsstylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.AllLogsController">
    <children>
-      <ListView fx:id="listView" layoutX="56.0" layoutY="68.0" onMouseClicked="#showEditor" prefHeight="452.0" prefWidth="488.0" />
-      <Label layoutX="127.0" layoutY="14.0" prefHeight="36.0" prefWidth="349.0" text="Hey !! Warning !! Your secrets... down there !" textFill="WHITE">
+      <ListView fx:id="listView" layoutX="194.0" layoutY="93.0" onMouseClicked="#showEditor" prefHeight="541.0" prefWidth="757.0" />
+      <Label layoutX="392.0" layoutY="39.0" prefHeight="36.0" prefWidth="349.0" text="Hey !! Warning !! Your secrets... down there !" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="48.0" fitWidth="51.0" layoutX="483.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="51.0" layoutX="748.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../emojis/yarr-icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="51.0" layoutX="69.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="51.0" layoutX="334.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../emojis/chinese-icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="163.0" fitWidth="224.0" layoutX="208.0" layoutY="212.0" opacity="0.31" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="163.0" fitWidth="224.0" layoutX="488.0" layoutY="271.0" opacity="0.31" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../emojis/victory-icon.png" />
          </image>
