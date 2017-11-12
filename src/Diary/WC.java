@@ -287,7 +287,7 @@ public class WC implements Initializable {
     public void main() throws IOException {
 
         WC inst = new WC();
-        br = new BufferedReader(new InputStreamReader(new FileInputStream("/Users/pranav/IdeaProjects/pranav/src/main/java/stopWords.txt")));
+        br = new BufferedReader(new InputStreamReader(new FileInputStream("stopWords.txt")));
         while ((line = br.readLine()) != null) {
             stopWordsSet.add(line);
         }

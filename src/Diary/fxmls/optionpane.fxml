@@ -2,13 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@../css/optionpanestyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.OptionPaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1149.0" stylesheets="@../css/optionpanestyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Diary.OptionPaneController">
    <children>
       <Button layoutX="219.0" layoutY="129.0" mnemonicParsing="false" onAction="#writeNewLog" prefHeight="74.0" prefWidth="216.0" text="New Entry" textFill="#f8f8f8">
          <font>
@@ -19,9 +18,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect></Button>
       <Button layoutX="720.0" layoutY="411.0" mnemonicParsing="false" onAction="#push2Cloud" prefHeight="74.0" prefWidth="216.0" text="push2cloud" textFill="WHITE">
@@ -33,9 +30,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect></Button>
       <Button layoutX="720.0" layoutY="266.0" mnemonicParsing="false" onAction="#showAllLogs" prefHeight="74.0" prefWidth="216.0" text="list all logs" textFill="WHITE">
@@ -47,9 +42,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect></Button>
       <Button layoutX="719.0" layoutY="126.0" mnemonicParsing="false" onAction="#analyse" prefHeight="74.0" prefWidth="216.0" text="Analyse Days" textFill="WHITE">
@@ -61,9 +54,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect></Button>
       <Button layoutX="219.0" layoutY="411.0" mnemonicParsing="false" onAction="#modifyOldLog" prefHeight="74.0" prefWidth="216.0" text="Modify old log" textFill="WHITE">
@@ -75,9 +66,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect>
       </Button>
@@ -90,9 +79,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect>
       </Button>
@@ -110,13 +97,11 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect>
       </Button>
-      <Button fx:id="printmybook" layoutX="470.0" layoutY="266.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="216.0" text="Print my book" textFill="WHITE">
+      <Button fx:id="printmybook" layoutX="470.0" layoutY="266.0" mnemonicParsing="false" onAction="#printpdf" prefHeight="74.0" prefWidth="216.0" text="Print my book" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="21.0" />
          </font>
@@ -125,9 +110,7 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
+               
             </Lighting>
          </effect>
       </Button>

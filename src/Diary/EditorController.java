@@ -174,7 +174,8 @@ public class EditorController implements Initializable {
             e.printStackTrace();
         }
 
-        String filetopbeuploaded = UPLOAD_FILE_PATH + "/" + date + " | " + titlename;
+        String filetopbeuploaded = UPLOAD_FILE_PATH + "/" + date + " | " + titlename+".txt";
+        System.out.println(filetopbeuploaded);
                 java.io.File yourFile = new java.io.File(filetopbeuploaded);
                 if (!yourFile.exists())
                     yourFile.createNewFile();
@@ -199,6 +200,7 @@ public class EditorController implements Initializable {
                 fileWriter.write("\n\nMedia memory : " + globaladd);
                 fileWriter.write("\n\n---------------------------------------------------------------------------------------");
                 fileWriter.close();
+
 
     }
     public void videopreview(){

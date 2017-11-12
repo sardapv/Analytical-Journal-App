@@ -80,6 +80,7 @@ public class VideoController implements Initializable {
                 e.printStackTrace();
             }
         }
+       // mediapath = "/Users/pranav/Downloads/crawler.mp4"; //testing line
 
         me = new Media(mediapath);
         mp = new MediaPlayer(me);

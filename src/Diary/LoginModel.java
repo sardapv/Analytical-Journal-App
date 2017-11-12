@@ -32,6 +32,10 @@ public class LoginModel {
     public boolean login(String userid, String userpass) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        boolean flag = true;
+        if(userid == "" || userpass == "")
+            return false;
+
         String query = "SELECT * FROM user WHERE username = ? AND passkey = ?";
         try{
             preparedStatement = connection.prepareStatement(query);

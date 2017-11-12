@@ -1,5 +1,6 @@
 package Diary;
 
+import edu.stanford.nlp.process.Stemmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -11,6 +12,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +25,10 @@ import java.util.*;
  * Created by pranav on 15/04/17
  */
 
-public class AnalysisController {
+public class
+
+
+AnalysisController {
     @FXML
     public PieChart pieChart;
     @FXML
@@ -44,10 +49,13 @@ public class AnalysisController {
     ArrayList<String> daysrating3 = new ArrayList<String>();
     List<Date> allDates = new ArrayList<Date>();
     List<String> allDatesString = new ArrayList<String>();
-
+    List<String> positiveWords = new ArrayList<>();
+    List<String> negativeWords = new ArrayList<>();
+    List<String> stopwords = new ArrayList<>();
     Connection connection;
+    Stemmer stemmer = new Stemmer();
 
-    public void analyse() throws SQLException {
+    public void analyse() throws SQLException, IOException {
         ratings.clear();
         rating1.clear();
         rating2.clear();
@@ -90,6 +98,23 @@ public class AnalysisController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        File poswords = new File("positive-words.txt");
+        File negwords = new File("negative-words.txt");
+        File sWords = new File("stopWords.txt");
+        BufferedReader bf1,bf2,bf3;
+        bf1 = new BufferedReader(new FileReader(poswords));
+        bf2 = new BufferedReader(new FileReader(negwords));
+        bf3 = new BufferedReader(new FileReader(sWords));
+        String line;
+        while((line = bf1.readLine())!=null){
+            positiveWords.add(line);
+        }
+        while((line = bf2.readLine())!=null){
+            negativeWords.add(line);
+        }
+        while((line = bf3.readLine())!=null){
+            stopwords.add(line);
+        }
         for(int i = 0; i < allDatesString.size(); i++) {
             String query = "SELECT * FROM DATA WHERE dateofday  = ? AND id = ?";
             float t = 0;
@@ -100,6 +125,16 @@ public class AnalysisController {
                 resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()) {
                     t = resultSet.getFloat("rating");
+                    String text = resultSet.getString("matter");
+                    ArrayList<Float> moodrating = getmoodClass(text);
+                    if(moodrating.get(0)>moodrating.get(1)){
+                        System.out.println(moodrating.get(0)+" "+t);
+                         t = (t+moodrating.get(0)*10)/2;
+                    }
+                    else {
+                        System.out.println(moodrating.get(1)+" "+t);
+                        t = (t + moodrating.get(1) * 10) / 2;
+                    }
                     ratings.add(t);
                     countofday++;
                 }
@@ -114,14 +149,17 @@ public class AnalysisController {
             dayrate = ratings.get(j);
             if (dayrate <= 4 && dayrate >= 0) {
                 rating1.add(dayrate);
+                System.out.println(rating1);
                 daysrating1.add(allDatesString.get(j));
             }
             else if (dayrate <= 7 && dayrate > 4) {
                 rating2.add(dayrate);
+                System.out.println(rating2);
                 daysrating2.add(allDatesString.get(j));
             }
             else if (dayrate <= 10 && dayrate > 7) {
-                rating3.add(dayrate);
+                rating3.add(dayrate);System.out.println(rating3);
+
                 daysrating3.add(allDatesString.get(j));
             }
 
@@ -150,6 +188,54 @@ public class AnalysisController {
         overall();
 
     }
+
+    private ArrayList<Float> getmoodClass(String text) {
+        float maxprob = 0;
+        String ans = "";
+        text = text.replaceAll("[[!,\",#,$,%,&,\\,',(,),*,+,-,.,/,:,;,<,=,>,?,@,^,_,|,~,0-9]*+[,(){}`,,-]*+['\']*]", " ");
+        float poscount = 0, negcount = 0, modcount = 0, totalcount = 0;
+        float posprob = 0, negprob = 0, modprob = 0;
+        for (String temp : text.split("\\s+")) {
+            if (!stopwords.contains(temp.toLowerCase())) {
+                String word = stemmer.stem(temp);
+                word = word.toLowerCase();
+                if (!stopwords.contains(word)) {
+                    if (positiveWords.contains(word))
+                        poscount++;
+                    if (negativeWords.contains(word))
+                        negcount++;
+                }
+            }
+        }
+        totalcount = poscount+negcount;
+        posprob = poscount / totalcount;
+        negprob = negcount / totalcount;
+
+        if (posprob > maxprob) {
+            maxprob = posprob;
+            ans = "pos";
+        }
+        if (negprob > maxprob) {
+            maxprob = negprob;
+            ans = "neg";
+        }
+        ArrayList<Float> probs= new ArrayList<>();
+        System.out.println(text);
+        probs.add(posprob);
+        probs.add(negprob);
+        if(Float.isNaN(posprob)) {
+
+            probs.remove(0);
+            probs.add((float) 0.50);
+        }
+        if(Float.isNaN(negprob)) {
+            probs.remove(1);
+            probs.add((float) 0.50);
+        }
+            System.out.println(probs);
+        return probs;
+    }
+
     public int DateDifference() {
         Calendar cal1 = new GregorianCalendar();
         Calendar cal2 = new GregorianCalendar();

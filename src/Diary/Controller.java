@@ -140,7 +140,7 @@ public class Controller implements Initializable {
     public String backupdir;
     public void backupDirectoryChoose(){
         DirectoryChooser directoryChooser= new DirectoryChooser();
-        directoryChooser.setTitle("Choose one media file");
+        directoryChooser.setTitle("Choose one directory");
         //Show open file dialog
         String address = null;
         File file = directoryChooser.showDialog(new Stage());

@@ -220,6 +220,9 @@ public class ModifyingEditorController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            connection.close();
+        }
         String filetopbeuploaded = UPLOAD_FILE_PATH + "/" + date + " | " + titlename;
         java.io.File yourFile = new java.io.File(filetopbeuploaded);
         if (!yourFile.exists())
@@ -246,7 +249,7 @@ public class ModifyingEditorController implements Initializable {
         fileWriter.write("\n\n---------------------------------------------------------------------------------------");
         fileWriter.close();
     }
-    public void videopreview(){
+    public void videopreview() throws SQLException {
         global_date = datePicker.getValue().toString();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmls/videoplayer.fxml"));
@@ -260,6 +263,7 @@ public class ModifyingEditorController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 

@@ -49,6 +49,7 @@ public class EditorDatabase {
         }
         finally {
             preparedStatement.close();
+            connection.close();
         }
     }
     public void modifyData(Integer id,String title,String datechoosen,String matter,String htmlmatter,String mediapath,float rating) throws SQLException {
@@ -70,6 +71,7 @@ public class EditorDatabase {
         }
         finally {
             preparedStatement.close();
+            connection.close();
         }
     }
 }
