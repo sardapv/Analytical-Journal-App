@@ -3,12 +3,19 @@ Note!T an analytical journal app
 -----------------------------------
 
 **IDE :** Intellij IDEA.
+
 **GUI :** JavaFX, **Tool :**Gluon JavaFX Scene Builder.
+
 **CLOUD** : Google-Drive.
+
 **P.LANG :** Java. (Requires oracle JDK)
+
 **Database :** SQLite, txt files.
+
 **jars required :** Google_Drive Api jars, Jsoup, itext, sqlite-jdbc.
+
 **OS used** : MacOSX, tested on Ubuntu 16.04.
+
 
 **If found erros or exceptions, please put your relative/absolute paths in code, it differs in windows and MacOSX/linux.**
 
@@ -16,6 +23,9 @@ Note!T an analytical journal app
 ------------------------------------
 It's simple, fork it, add new features, solve bugs, pull request.
 Happy Logging!
+
+
+
 
 MIT License
 Copyright (c) 2017 Pranav Sarda
